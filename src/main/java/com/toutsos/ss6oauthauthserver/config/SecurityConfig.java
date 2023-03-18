@@ -49,7 +49,7 @@ public class SecurityConfig {
      */
 
     /**
-     * Get token url: http://localhost:8080/oauth2/token?client_id=client&redirect_uri=https://springone.io/authorized&grant_type=authorization_code&code=[code from previous request]&code_verifier=9_CMF_xcisJFyvzA3WNoyyHLuLJ1~RFUkjjhHc3tPWdYP0qaKLvPUdejrcK5edcj5no_Rlz_Ve7Z46U2Wro.VF9.sov-0-lF1yMzZR6SnX4Fo5cnQCsSjXCPJXoREIME
+     * Get token url: http://localhost:8080/oauth2/token?client_id=client&redirect_uri=https://springone.io/authorized&grant_type=authorization_code&code=[code from previous request]&code_verifier=-6MTSCntuU-u3NPfiZotLD4Vg-LiDExWJyzgd9Axm90y3KtKmmUtodvqAVjzf4M7MWWJLP63KWabHjX9MOi3MprGzH5DsbxPBc9VnH4DFYOb802UPsSmzfevOBOmHhdy
      */
 
     /**
