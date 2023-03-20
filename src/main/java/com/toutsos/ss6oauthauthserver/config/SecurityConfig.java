@@ -156,6 +156,12 @@ public class SecurityConfig {
                 .build();
     }
 
+    /**
+     * When we are using JWT it has to be signed in order to identify if data have been changed
+     * We use a public and private key for this purpose
+     * @return
+     * @throws Exception
+     */
     @Bean
     public JWKSource<SecurityContext> jwkSource() throws Exception {
         KeyPairGenerator kg = KeyPairGenerator.getInstance("RSA");
