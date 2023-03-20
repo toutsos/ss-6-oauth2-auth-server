@@ -22,7 +22,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
-import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
+import org.springframework.security.oauth2.server.authorization.settings.*;
 import org.springframework.security.oauth2.server.authorization.token.*;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -33,6 +33,7 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.time.*;
 import java.util.UUID;
 
 
@@ -128,6 +129,22 @@ public class SecurityConfig {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                /**
+                 * Configure default access token
+                 */
+                .tokenSettings(
+                        TokenSettings.builder()
+                                /**
+                                 * REFERENCE = opaque token (token which does not contains info about user, no JWT anymore)
+                                 * in order to  retrieve info for a user when using this kind of token you have to receive token as usual
+                                 * and then send this token to OAuth2 server at /oauth2/introspect/?token=...
+                                 * and as response you receive user's data
+                                 */
+                                .accessTokenFormat(OAuth2TokenFormat.REFERENCE)
+                                //changes the lifetime of token
+                                .accessTokenTimeToLive(Duration.ofSeconds(900))
+                                .build()
+                )
                 .build();
 
         return new InMemoryRegisteredClientRepository(r1);
