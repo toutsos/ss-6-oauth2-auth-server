@@ -72,6 +72,9 @@ public class SecurityConfig {
     public SecurityFilterChain asSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 
+        /**
+         * We also receive Open Id Token at the same time with regular auth token from OAuth2
+         */
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults());
 
@@ -114,6 +117,10 @@ public class SecurityConfig {
         RegisteredClient r1 = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client")
                 .clientSecret("secret")
+                /**
+                 * That means that we need to provide CLient id & secret to obtain token (not code)
+                 */
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .scope(OidcScopes.OPENID)
                 .scope(OidcScopes.PROFILE)
                 .redirectUri("https://springone.io/authorized")
