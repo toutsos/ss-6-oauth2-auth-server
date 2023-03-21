@@ -140,7 +140,7 @@ public class SecurityConfig {
                                  * and then send this token to OAuth2 server at /oauth2/introspect/?token=...
                                  * and as response you receive user's data
                                  */
-                                .accessTokenFormat(OAuth2TokenFormat.REFERENCE)
+                                .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
                                 //changes the lifetime of token
                                 .accessTokenTimeToLive(Duration.ofSeconds(900))
                                 .build()
